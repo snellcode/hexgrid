@@ -1,5 +1,8 @@
 # hexgrid
 
+## Online Demo
+https://hexgrid.got.solar/
+
 ## CLI Commands
 *   `yarn`: Installs dependencies
 
