@@ -24,7 +24,7 @@ export class GridScene extends Phaser.Scene {
           gridType: "hexagonGrid",
           x: 60,
           y: 60,
-          size: 30,
+          size: 2,
           staggeraxis: staggeraxis as any,
           staggerindex: staggerindex as any
         },
