@@ -1,5 +1,7 @@
 # hexgrid
 
+![hexgrid](https://got.solar/downloads/hexgrid.png)
+
 ## Online Demo
 https://hexgrid.got.solar/
 
