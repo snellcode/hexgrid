@@ -1,6 +1,6 @@
 # hexgrid
 
-![hexgrid](https://got.solar/downloads/hexgrid.png)
+![hexgrid](https://got.solar/downloads/hexgrid.png?1)
 
 ## Online Demo
 https://hexgrid.got.solar/
