@@ -1,5 +1,4 @@
 import { h } from "preact";
-import style from "./style.css";
 import { useEffect } from "preact/hooks";
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
