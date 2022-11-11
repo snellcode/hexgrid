@@ -1,10 +1,15 @@
+import Phaser from "phaser";
+
 export class CameraScene extends Phaser.Scene
 {
-    constructor ()
-    {
-        super();
-    }
-
+  private cursors: any;
+  private keys: any;
+  private text: any;
+  constructor() {
+    super({
+      key: "examples",
+    });
+  }
     preload () 
     {
         this.load.image('bg', 'assets/uv-grid-diag.png');
@@ -13,12 +18,12 @@ export class CameraScene extends Phaser.Scene
 
     create () 
     {
-        this.cameras.main.setBounds(0, 0, 2024 * 2, 2024 * 2);
+        this.cameras.main.setBounds(0, 0, 1024 * 2, 1024 * 2);
 
         this.add.image(0, 0, 'bg').setOrigin(0);
-        this.add.image(2024, 0, 'bg').setOrigin(0);
-        this.add.image(0, 2024, 'bg').setOrigin(0);
-        this.add.image(2024, 2024, 'bg').setOrigin(0);
+        this.add.image(1024, 0, 'bg').setOrigin(0);
+        this.add.image(0, 1024, 'bg').setOrigin(0);
+        this.add.image(1024, 1024, 'bg').setOrigin(0);
     
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keys = this.input.keyboard.addKeys('W,A,S,D');
@@ -26,12 +31,13 @@ export class CameraScene extends Phaser.Scene
         // this.cameras.main.originX = 1;
         this.cameras.main.centerToBounds();
     
+        // @ts-ignore
         this.text = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#ffffff');
     }
 
     update () 
     {
-        const cam = this.cameras.main;
+        const cam = this.cameras.main as any;
 
         this.text.setText([
             'ScrollX: ' + cam.scrollX,
@@ -68,5 +74,3 @@ export class CameraScene extends Phaser.Scene
         }
     }
 }
-
-

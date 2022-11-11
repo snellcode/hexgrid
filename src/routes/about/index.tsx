@@ -1,8 +1,7 @@
 import { h } from "preact";
 
 const About = () => {
-  throw "E"
-  return <div class="about">About this app...</div>;
+  return <div class="app-route container">About this app...</div>;
 };
 
-export default About
+export default About;

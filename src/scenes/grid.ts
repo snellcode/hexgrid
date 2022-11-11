@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 
 const Random = Phaser.Math.Between;
