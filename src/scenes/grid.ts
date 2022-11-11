@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 
 const Random = Phaser.Math.Between;
@@ -24,7 +25,7 @@ export class GridScene extends Phaser.Scene {
           gridType: "hexagonGrid",
           x: 60,
           y: 60,
-          size: 30,
+          size: 20,
           staggeraxis: staggeraxis as any,
           staggerindex: staggerindex as any
         },

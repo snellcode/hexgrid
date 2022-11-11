@@ -25,3 +25,6 @@ For detailed explanation on how things work, checkout the [CLI Readme](https://g
 
 created with 
 npx preact-cli create typescript hexgrid
+
+1,152 columns by 1440 rows
+1,658,880
