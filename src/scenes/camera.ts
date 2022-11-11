@@ -21,16 +21,17 @@ export class CameraScene extends Phaser.Scene {
   }
 
   create() {
+
     // @ts-ignore
-    this.text = this.add
-      .text(32, 32)
+    this.text = this.add.text(32, 32)
       .setScrollFactor(0)
       .setFontSize(32)
       .setColor("#ffffff");
     if (!this.rexBoard) {
       return;
     }
-    var radius = 50;
+
+    var radius = 20;
     var hexSize = 30;
 
     var print = this.add.text(0, 0, "Click any tile");
@@ -79,12 +80,11 @@ export class CameraScene extends Phaser.Scene {
     this.cameras.main.centerToBounds();
 
     for (var i in tileXYArray) {
-      i = parseInt(i, 10);
 
       // @ts-ignore
       tileXY = tileXYArray[i];
 
-      if (Math.floor(tileXYArray.length / 2) === i) {
+      if (Math.floor((tileXYArray as any).length / 2) === parseInt(i, 10)) {
         graphics = this.add.graphics({
           lineStyle: {
             width: 1,
@@ -101,11 +101,9 @@ export class CameraScene extends Phaser.Scene {
           },
         });
       }
-      var strokePoints = board.getGridPoints(tileXY.x, tileXY.y, true);
-      console.log(strokePoints)
       if (this.cameras.main.worldView.contains(tileXY.x, tileXY.y)) {
         graphics.strokePoints(
-          strokePoints,
+          board.getGridPoints(tileXY.x, tileXY.y, true),
           true
         );
       }
