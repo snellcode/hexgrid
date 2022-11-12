@@ -2,8 +2,9 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
-import { GridScene } from "@src/scenes/grid";
-import { CameraScene } from "@src/scenes/camera";
+// import { GridScene } from "@src/scenes/grid";
+// import { CameraScene } from "@src/scenes/camera";
+import { Demo1Scene } from "@src/scenes/demo1";
 
 let game: any;
 
@@ -15,7 +16,7 @@ const config = {
   physics: {
     default: "arcade",
   },
-  scene: [CameraScene],
+  scene: [Demo1Scene],
   plugins: {
     scene: [
       {
