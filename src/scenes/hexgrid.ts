@@ -112,27 +112,27 @@ export class HexgridScene extends Phaser.Scene {
       this.tileXYArray = this.board.fit(
         this.rexBoard.hexagonMap.hexagon(this.board, this.cols / 4)
       );
-    }
-  }
 
-  updateGrid() {
-    var tileXY, worldXY;
+      var tileXY, worldXY;
 
-    for (var i in this.tileXYArray) {
-      // @ts-ignore
-      tileXY = this.tileXYArray[i];
-      if (
-        Math.floor((this.tileXYArray as any).length / 2) === parseInt(i, 10)
-      ) {
-        this.graphics.lineStyle(1, 0x00ffff, 1.0);
-      } else {
-        this.graphics.lineStyle(1, 0xffffff, 1.0);
+      for (var i in this.tileXYArray) {
+        // @ts-ignore
+        tileXY = this.tileXYArray[i];
+        if (
+          Math.floor((this.tileXYArray as any).length / 2) === parseInt(i, 10)
+        ) {
+          this.graphics.lineStyle(1, 0x00ffff, 1.0);
+        } else {
+          this.graphics.lineStyle(1, 0xffffff, 1.0);
+        }
+
+        this.graphics.strokePoints(
+          this.board.getGridPoints(tileXY.x, tileXY.y, true),
+          true
+        );
       }
-
-      this.graphics.strokePoints(
-        this.board.getGridPoints(tileXY.x, tileXY.y, true),
-        true
-      );
     }
   }
+
+  updateGrid() {}
 }

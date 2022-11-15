@@ -29,6 +29,7 @@ a {
   height: 100%;
   background: black;
   z-index: 1;
+  overflow-y: auto;
 }
 
 .app-header {
@@ -46,9 +47,185 @@ a {
   h1 {
     margin: 0;
   }
+
+  nav a {
+    margin-right: 2rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 #phaser-container canvas {
   display: block;
   margin: auto;
+}
+
+.menu {
+  a {
+    text-decoration: none;
+  }
+
+  nav {
+    font-family: monospace;
+  }
+
+  ul {
+    background: hotpink;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  li {
+    color: #fff;
+    background: hotpink;
+    display: block;
+    float: left;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    margin-bottom: 0;
+  }
+
+  li a {
+    color: #fff;
+    display: block;
+  }
+
+  li:hover {
+    background: orange;
+    cursor: pointer;
+  }
+
+  ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    right: 0;
+    display: none;
+    min-width: 100px;
+  }
+
+  ul li:hover > ul,
+  ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+  }
+
+  ul li ul li {
+    clear: both;
+    width: 100%;
+  }
+}
+
+.css-vertical {
+  display: flex;
+  font-size: 0; /*disable white space between inline block element */
+  background: red;
+
+  --s: 100px; /* size */
+  --r: 1; /* ratio */
+  /* clip-path */
+  --h: 0.25;
+  --v: 0.5;
+  --hc: calc(clamp(0, var(--h), 0.5) * var(--s));
+  --vc: calc(clamp(0, var(--v), 0.5) * var(--s) * var(--r));
+
+  /*margin */
+  --mv: 1px; /* vertical */
+  --mh: calc(var(--mv) + (var(--s) - 2 * var(--hc)) / 2); /* horizontal */
+  /* for the float*/
+  --f: calc(2 * var(--s) * var(--r) + 4 * var(--mv) - 2 * var(--vc) - 2px);
+
+  .css-vertical-container {
+    &::before {
+      content: "";
+      width: calc(var(--s) / 2 + var(--mh));
+      float: left;
+      height: 135%;
+      shape-outside: repeating-linear-gradient(
+        #0000 0 calc(var(--f) - 2px),
+        #000 0 var(--f)
+      );
+    }
+
+    div {
+      width: var(--s);
+      margin: var(--mv) var(--mh);
+      height: calc(var(--s) * var(--r));
+      display: inline-block;
+      font-size: initial;
+      clip-path: polygon(
+        var(--hc) 0,
+        calc(100% - var(--hc)) 0,
+        100% var(--vc),
+        100% calc(100% - var(--vc)),
+        calc(100% - var(--hc)) 100%,
+        var(--hc) 100%,
+        0 calc(100% - var(--vc)),
+        0 var(--vc)
+      );
+      background: black;
+      margin-bottom: calc(var(--mv) - var(--vc));
+    }
+  }
+}
+
+.css-horizontal {
+  display: flex;
+  font-size: 0; /*disable white space between inline block element */
+  background: red;
+
+  --s: 100px; /* size */
+  --r: 1; /* ratio */
+  /* clip-path */
+  --h: 0.5;
+  --v: 0.25;
+  --hc: calc(clamp(0, var(--h), 0.5) * var(--s));
+  --vc: calc(clamp(0, var(--v), 0.5) * var(--s) * var(--r));
+
+  /*margin */
+  --mv: 1px; /* vertical */
+  --mh: calc(var(--mv) + (var(--s) - 2 * var(--hc)) / 2); /* horizontal */
+  /* for the float*/
+  --f: calc(2 * var(--s) * var(--r) + 4 * var(--mv) - 2 * var(--vc) - 2px);
+
+  .css-horizontal-container {
+    &::before {
+      content: "";
+      width: calc(var(--s) / 2 + var(--mh));
+      float: left;
+      height: 135%;
+      shape-outside: repeating-linear-gradient(
+        #0000 0 calc(var(--f) - 2px),
+        #000 0 var(--f)
+      );
+    }
+
+    div {
+      width: var(--s);
+      margin: var(--mv) var(--mh);
+      height: calc(var(--s) * var(--r));
+      display: inline-block;
+      font-size: initial;
+      clip-path: polygon(
+        var(--hc) 0,
+        calc(100% - var(--hc)) 0,
+        100% var(--vc),
+        100% calc(100% - var(--vc)),
+        calc(100% - var(--hc)) 100%,
+        var(--hc) 100%,
+        0 calc(100% - var(--vc)),
+        0 var(--vc)
+      );
+      background: black;
+      margin-bottom: calc(var(--mv) - var(--vc));
+    }
+  }
 }

@@ -6,6 +6,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import { AppError } from "./error";
 import Home from "@src/routes/home";
 import About from "@src/routes/about";
+import CssVertical from "@src/routes/css-vertical";
+import CssHorizontal from "@src/routes/css-horizontal";
+import PhaserRex from "@src/routes/phaser-rex";
 
 export const AppRouter = () => {
   return (
@@ -15,6 +18,9 @@ export const AppRouter = () => {
           <Router>
             <Route path="/" component={Home} />
             <Route path="/about/" component={About} />
+            <Route path="/css-vertical/" component={CssVertical} />
+            <Route path="/css-horizontal/" component={CssHorizontal} />
+            <Route path="/phaser-rex/" component={PhaserRex} />
           </Router>
         </ErrorBoundary>
       </div>

@@ -9,11 +9,43 @@ export const AppHeader = () => (
           hexgrid
         </Link>
       </h1>
-      <nav>
-        <Link activeClassName="active" href="/about">
-          About
-        </Link>
-      </nav>
+
+      <div class="menu">
+        <nav role="navigation">
+          <ul>
+            <li>
+              Menu
+              <ul class="dropdown">
+                <li>
+                  <Link activeClassName="active" href="/">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" href="/css-vertical">
+                    CSS Vertical
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" href="/css-horizontal">
+                    CSS Horizontal
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" href="/phaser-rex">
+                    Phaser Rex Plugin
+                  </Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" href="/about">
+                    About
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 );
