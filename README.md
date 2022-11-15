@@ -25,3 +25,7 @@ For detailed explanation on how things work, checkout the [CLI Readme](https://g
 
 created with 
 npx preact-cli create typescript hexgrid
+
+## Thanks To:
+
+https://www.redblobgames.com/grids/hexagons/

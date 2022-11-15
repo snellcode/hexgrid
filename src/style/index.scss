@@ -62,8 +62,10 @@ a {
 }
 
 .menu {
+  font-weight: bold;
   a {
     text-decoration: none;
+    font-weight: bold;
   }
 
   nav {
@@ -78,7 +80,7 @@ a {
   }
 
   li {
-    color: #fff;
+    color: black;
     background: hotpink;
     display: block;
     float: left;
@@ -90,8 +92,9 @@ a {
   }
 
   li a {
-    color: #fff;
+    color: black;
     display: block;
+    font-weight: bold;
   }
 
   li:hover {
@@ -108,7 +111,7 @@ a {
     margin-top: 1rem;
     right: 0;
     display: none;
-    min-width: 100px;
+    min-width: 200px;
   }
 
   ul li:hover > ul,

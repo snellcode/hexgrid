@@ -3,6 +3,7 @@ import { h } from "preact";
 const About = () => {
   return (
     <div class="app-route container">
+      <p>By Phil Snell, with help from:</p>
       <ul>
         <li>
           CSS Hexagons:

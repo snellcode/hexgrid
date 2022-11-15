@@ -2,7 +2,7 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
-import { PhaserCustomScene } from  "./scene";
+// import { PhaserCustomScene } from  "./scene";
 
 let game: any;
 
@@ -14,7 +14,7 @@ const config = {
   physics: {
     default: "arcade",
   },
-  scene: [PhaserCustomScene]
+  // scene: [PhaserCustomScene]
 };
 
 const PhaserCustom = () => {
