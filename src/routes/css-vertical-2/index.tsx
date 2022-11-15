@@ -3,13 +3,13 @@ import Async from "react-async";
 import './style.scss';
 
 const getGrid = async () => {
-  const res = (await fetch("assets/island.txt")) as any;
+  const res = await fetch("assets/island.txt");
   if (!res.ok) throw new Error(res.statusText);
   let text = await res.text();
   return text
     .split("\n")
-    .filter((x: String) => x.length)
-    .map((x: String) =>
+    .filter((x) => x.length)
+    .map((x) =>
       x
         .split(",")
         .filter((x) => x !== "")
@@ -23,7 +23,7 @@ type Props = {
   isPending: any;
 };
 
-const CssHorizontal = () => (
+const CssVertical2 = () => (
   <Async promiseFn={getGrid}>
     {({ data, error, isPending }: Props) => {
       if (isPending) return "Loading...";
@@ -31,9 +31,9 @@ const CssHorizontal = () => (
       if (data)
         return (
           <div class="app-route container">
-            <div class="css-horizontal">
-              <div class="css-horizontal-container">
-                {[...Array(200)].map((e, i) => <div></div>)}  
+            <div class="css-vertical-2">
+              <div class="css-vertical-2-container">
+                {[...Array(200)].map((e, i) => <div></div>)}    
               </div>
             </div>
           </div>
@@ -43,4 +43,4 @@ const CssHorizontal = () => (
   </Async>
 );
 
-export default CssHorizontal;
+export default CssVertical2;

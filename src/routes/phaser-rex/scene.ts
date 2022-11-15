@@ -4,7 +4,7 @@ import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 let tileX = 0;
 let tileY = 0;
 
-export class HexgridScene extends Phaser.Scene {
+export class PhaserRexScene extends Phaser.Scene {
   private camera: any;
   private graphics: any;
   private keys: any;

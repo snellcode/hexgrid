@@ -1,0 +1,36 @@
+:global {
+  .css-vertical-2 {
+    --Nhexa: 10;
+    --gap: 3px;
+    // --size: calc(calc(100vw / var(--Nhexa)) - var(--gap));
+    --size: 100px;
+
+    display: flex;
+    font-size: 0; /*disable white space between inline block element */
+    background: red;
+
+    .css-vertical-2-container {
+      margin: calc(var(--size) * 0.5) auto 0;
+      width: calc(var(--size) * calc(var(--Nhexa) - 1));
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      // grid-auto-flow: column;
+      grid-gap: 1px;
+
+      div {
+        background: black;
+        width: var(--size);
+        height: calc(var(--size) / 1.1111111);
+        clip-path: url(#hexagono);
+        clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+        margin-right: calc(var(--size) / 2);
+        color: #fff;
+        overflow: hidden;
+      }
+      div:nth-child(2n) {
+        margin: calc(var(--size) * -0.45) calc(var(--size) * -0.25) 0
+          calc(var(--size) * -0.75);
+      }
+    }
+  }
+}

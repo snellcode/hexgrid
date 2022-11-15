@@ -2,7 +2,7 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
-import { PhaserRexScene } from  "./scene";
+import { PhaserCustomScene } from  "./scene";
 
 let game: any;
 
@@ -14,19 +14,10 @@ const config = {
   physics: {
     default: "arcade",
   },
-  scene: [PhaserRexScene],
-  plugins: {
-    scene: [
-      {
-        key: "rexBoard",
-        plugin: BoardPlugin,
-        mapping: "rexBoard",
-      },
-    ],
-  },
+  scene: [PhaserCustomScene]
 };
 
-const PhaserRex = () => {
+const PhaserCustom = () => {
   useEffect(() => {
     if (game) {
       location.reload();
@@ -40,5 +31,5 @@ const PhaserRex = () => {
   );
 };
 
-export default PhaserRex;
+export default PhaserCustom;
 
