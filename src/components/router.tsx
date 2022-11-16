@@ -9,6 +9,7 @@ import About from "@src/routes/about";
 import CssVertical from "@src/routes/css-vertical";
 import CssHorizontal from "@src/routes/css-horizontal";
 import PhaserRex from "@src/routes/phaser-rex";
+import PhaserRex2 from "@src/routes/phaser-rex2";
 
 export const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRouter = () => {
             <Route path="/css-vertical/" component={CssVertical} />
             <Route path="/css-horizontal/" component={CssHorizontal} />
             <Route path="/phaser-rex/" component={PhaserRex} />
+            <Route path="/phaser-rex2/" component={PhaserRex2} />
           </Router>
         </ErrorBoundary>
       </div>

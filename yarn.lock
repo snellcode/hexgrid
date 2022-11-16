@@ -1723,6 +1723,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/webfontloader@*":
+  version "1.6.35"
+  resolved "https://registry.yarnpkg.com/@types/webfontloader/-/webfontloader-1.6.35.tgz#c9cedff2995c61ee9b2064714e7f7d7763ac50bd"
+  integrity sha512-IJlrsiDWq6KghQ7tPlL5tcwSUyOxLDceT+AFUY7Ylj0Fcv3/h3QkANqQxZ0B5mEpEKxhTw76vDmvrruSMV9n9Q==
+
 "@types/webpack-sources@*":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-3.2.0.tgz#16d759ba096c289034b26553d2df1bf45248d38b"
@@ -4691,15 +4696,15 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
+eventemitter3@*, eventemitter3@^4.0.0, eventemitter3@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
+  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
+
 eventemitter3@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
-
-eventemitter3@^4.0.0, eventemitter3@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
-  integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
 
 events@^3.0.0:
   version "3.3.0"
@@ -8172,6 +8177,15 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
 
+phaser3-rex-plugins-types@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/phaser3-rex-plugins-types/-/phaser3-rex-plugins-types-0.2.0.tgz#b97e166f4c22929dbafd48644bdebf8257eab86d"
+  integrity sha512-dNe65URYeZHPV2JK/7CsTHFzZJrUvnTpvPUDB/m5XMuBTLAZ1aTsWS0SZVs9/1aj9dvXEMdRTDbv+ljkHrWQxQ==
+  dependencies:
+    "@types/webfontloader" "*"
+    eventemitter3 "*"
+    phaser "*"
+
 phaser3-rex-plugins@^1.1.75:
   version "1.1.75"
   resolved "https://registry.yarnpkg.com/phaser3-rex-plugins/-/phaser3-rex-plugins-1.1.75.tgz#5b2a3773f6e30f79d2ef95242507638e69e19e8a"
@@ -8183,7 +8197,7 @@ phaser3-rex-plugins@^1.1.75:
     papaparse "^5.3.2"
     webfontloader "^1.6.28"
 
-phaser@^3.55.2:
+phaser@*, phaser@^3.55.2:
   version "3.55.2"
   resolved "https://registry.yarnpkg.com/phaser/-/phaser-3.55.2.tgz#c1e2e9e70de7085502885e06f46b7eb4bd95e29a"
   integrity sha512-amKXsbb2Ht29dGPKvt1edq3yGGYKtq8373GpJYGKPNPnneYY6MtVTOgjHDuZwtmUyK4v86FugkT3hzW/N4tjxQ==

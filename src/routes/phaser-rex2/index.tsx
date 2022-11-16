@@ -2,8 +2,7 @@ import { h } from "preact";
 import { useEffect } from "preact/hooks";
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
-import AwaitLoaderPlugin from "phaser3-rex-plugins/plugins/awaitloader-plugin";
-import { PhaserRexScene } from "./scene";
+import { PhaserRexScene } from  "./scene";
 
 let game: any;
 
@@ -17,13 +16,6 @@ const config = {
   },
   scene: [PhaserRexScene],
   plugins: {
-    global: [
-      {
-        key: "rexAwaitLoader",
-        plugin: AwaitLoaderPlugin,
-        start: true,
-      },
-    ],
     scene: [
       {
         key: "rexBoard",
@@ -34,28 +26,7 @@ const config = {
   },
 };
 
-const getGrid = async () => {
-  const res = await fetch("assets/island.txt");
-  if (!res.ok) throw new Error(res.statusText);
-  let text = await res.text();
-  return text
-    .split("\n")
-    .filter((x) => x.length)
-    .map((x) =>
-      x
-        .split(",")
-        .filter((x) => x !== "")
-        .map((x) => parseFloat(x))
-    );
-};
-
-type Props = {
-  data: any;
-  error: any;
-  isPending: any;
-};
-
-const PhaserRex = () => {
+const PhaserRex2 = () => {
   useEffect(() => {
     if (game) {
       location.reload();
@@ -69,4 +40,5 @@ const PhaserRex = () => {
   );
 };
 
-export default PhaserRex;
+export default PhaserRex2;
+

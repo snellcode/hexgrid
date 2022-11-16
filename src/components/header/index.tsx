@@ -1,6 +1,15 @@
 import { h } from "preact";
 import { Link } from "preact-router/match";
 
+const links = [
+  ["Home", "/"],
+  ["CSS (Vertical)", "/css-vertical"],
+  ["CSS (Horizontal)", "/css-horizontal"],
+  ["Phaser (Rex Plugin)", "/phaser-rex"],
+  ["Phaser (Rex Plugin) 2", "/phaser-rex2"],
+  ["About", "/about"],
+];
+
 export const AppHeader = () => (
   <header class="app-header">
     <div class="container">
@@ -16,31 +25,13 @@ export const AppHeader = () => (
             <li>
               Menu
               <ul class="dropdown">
-                <li>
-                  <Link activeClassName="active" href="/">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" href="/css-vertical">
-                    CSS (Vertical)
-                  </Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" href="/css-horizontal">
-                    CSS (Horizontal)
-                  </Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" href="/phaser-rex">
-                    Phaser (Rex Plugin)
-                  </Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" href="/about">
-                    About
-                  </Link>
-                </li>
+                {links.map((link) => (
+                  <li>
+                    <Link activeClassName="active" href={link[1]}>
+                      {link[0]}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </li>
           </ul>
