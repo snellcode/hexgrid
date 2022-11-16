@@ -31,9 +31,9 @@ const CssVertical = () => (
       if (data)
         return (
           <div class="app-route container">
-            <div class="css-vertical">
-              <div class="css-vertical-container">
-                {[...Array(200)].map((e, i) => <div></div>)}  
+            <div class="css-vertical-2">
+              <div class="css-vertical-2-container">
+                {[...Array(200)].map((e, i) => <div></div>)}    
               </div>
             </div>
           </div>

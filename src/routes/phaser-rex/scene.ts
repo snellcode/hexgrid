@@ -1,8 +1,51 @@
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 
+let tileSize = 16;
 let tileX = 0;
 let tileY = 0;
+let chunkSize = 13;
+
+let ratio = 1;
+
+if (chunkSize % 2 !== 0) {
+  ratio = 1
+  if (chunkSize >= 5) {
+    ratio = 1.25;
+  }
+  if (chunkSize >= 9) {
+    ratio = 1.5;
+  }
+  if (chunkSize >= 11) {
+    ratio = 1.835;
+  }
+  if (chunkSize >= 13) {
+    ratio = 1.625;
+  }
+}
+
+let offsetYRatio = chunkSize % 2 === 0 ? chunkSize / 2 : chunkSize / ratio;
+
+let offsetX1 = 0;
+let offsetY1 = 0;
+
+let offsetX2 = - (chunkSize * 2);
+let offsetY2 = 0;
+
+let offsetX3 = chunkSize * 2;
+let offsetY3 = 0;
+
+let offsetX4 = - chunkSize;
+let offsetY4 = - (chunkSize + offsetYRatio);
+
+let offsetX5 = chunkSize;
+let offsetY5 = - (chunkSize + offsetYRatio);
+
+let offsetX6 = -chunkSize;
+let offsetY6 = chunkSize + offsetYRatio;
+
+let offsetX7 = chunkSize;
+let offsetY7 = chunkSize + offsetYRatio;
 
 export class PhaserRexScene extends Phaser.Scene {
   private camera: any;
@@ -11,7 +54,7 @@ export class PhaserRexScene extends Phaser.Scene {
   private text: any;
   private cols = 50;
   private rows = 50;
-  private tileSize = 64;
+  // private tileSize = 16;
   private board: any;
   private rexBoard: BoardPlugin | undefined;
   private tileXYArray: any;
@@ -34,10 +77,10 @@ export class PhaserRexScene extends Phaser.Scene {
     this.camera = this.cameras.main;
     const cam = this.cameras.main;
     this.bounds = {
-      x: this.cols * this.tileSize,
-      y: this.rows * this.tileSize,
+      x: chunkSize * tileSize * 11,
+      y: chunkSize * tileSize * 12 - (chunkSize * 5),
     };
-    console.log(this.bounds);
+    // console.log(this.bounds);
     cam.setBounds(0, 0, this.bounds.x, this.bounds.y).setZoom(1);
     this.cameras.main.centerToBounds();
 
@@ -75,6 +118,24 @@ export class PhaserRexScene extends Phaser.Scene {
     ]);
   }
 
+  drawGrid(i: any, tileXY: any, offsetX: any, offsetY: any, color: any) {
+    this.graphics.lineStyle(1, color, 1.0);
+    this.graphics.strokePoints(
+      this.board.getGridPoints(tileXY.x + offsetX, tileXY.y + offsetY, true),
+      true
+    );
+    if (Math.floor((this.tileXYArray as any).length / 2) === parseInt(i, 10)) {
+      this.graphics
+        .fillStyle(0xffffff)
+        .fillPoints(
+          this.board.getGridPoints(
+            tileXY.x + offsetX,
+            tileXY.y + offsetY,
+            true
+          )
+        );
+    }
+  }
   createGrid() {
     const cam = this.camera;
     const { width, height } = cam;
@@ -94,9 +155,9 @@ export class PhaserRexScene extends Phaser.Scene {
         .board({
           grid: {
             gridType: "hexagonGrid",
-            x: 0,
-            y: 0,
-            size: this.tileSize,
+            x: chunkSize * tileSize * 4,
+            y: chunkSize * tileSize * 4,
+            size: tileSize,
             staggeraxis: staggeraxis,
             staggerindex: staggerindex,
           },
@@ -110,7 +171,7 @@ export class PhaserRexScene extends Phaser.Scene {
 
     if (this.board && this.rexBoard) {
       this.tileXYArray = this.board.fit(
-        this.rexBoard.hexagonMap.hexagon(this.board, this.cols / 4)
+        this.rexBoard.hexagonMap.hexagon(this.board, chunkSize)
       );
 
       var tileXY, worldXY;
@@ -118,18 +179,13 @@ export class PhaserRexScene extends Phaser.Scene {
       for (var i in this.tileXYArray) {
         // @ts-ignore
         tileXY = this.tileXYArray[i];
-        if (
-          Math.floor((this.tileXYArray as any).length / 2) === parseInt(i, 10)
-        ) {
-          this.graphics.lineStyle(1, 0x00ffff, 1.0);
-        } else {
-          this.graphics.lineStyle(1, 0xffffff, 1.0);
-        }
-
-        this.graphics.strokePoints(
-          this.board.getGridPoints(tileXY.x, tileXY.y, true),
-          true
-        );
+        this.drawGrid(i, tileXY, offsetX1, offsetY1, 0xffff00);
+        this.drawGrid(i, tileXY, offsetX2, offsetY2, 0xffffff);
+        this.drawGrid(i, tileXY, offsetX3, offsetY3, 0xff00ff);
+        this.drawGrid(i, tileXY, offsetX4, offsetY4, 0xff00ff);
+        this.drawGrid(i, tileXY, offsetX5, offsetY5, 0xffffff);
+        this.drawGrid(i, tileXY, offsetX6, offsetY6, 0xff00ff);
+        this.drawGrid(i, tileXY, offsetX7, offsetY7, 0xffffff); 
       }
     }
   }

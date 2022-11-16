@@ -6,8 +6,14 @@ const About = () => {
       <p>By Phil Snell, with help from:</p>
       <ul>
         <li>
-          CSS Hexagons:
+          CSS Hexagons 1:
           <a href="https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/">
+            Source
+          </a>
+        </li>
+        <li>
+          CSS Hexagons 2:
+          <a href="https://codepen.io/Kseso/pen/xqNdmO">
             Source
           </a>
         </li>

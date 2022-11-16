@@ -1,53 +1,35 @@
 :global {
-  .css-vertical {
+  .css-vertical-2 {
+    --Nhexa: 10;
+    --gap: 3px;
+    // --size: calc(calc(100vw / var(--Nhexa)) - var(--gap));
+    --size: 100px;
+
     display: flex;
     font-size: 0; /*disable white space between inline block element */
     background: red;
 
-    --s: 100px; /* size */
-    --r: 1; /* ratio */
-    /* clip-path */
-    --h: 0.25;
-    --v: 0.5;
-    --hc: calc(clamp(0, var(--h), 0.5) * var(--s));
-    --vc: calc(clamp(0, var(--v), 0.5) * var(--s) * var(--r));
-
-    /*margin */
-    --mv: 1px; /* vertical */
-    --mh: calc(var(--mv) + (var(--s) - 2 * var(--hc)) / 2); /* horizontal */
-    /* for the float*/
-    --f: calc(2 * var(--s) * var(--r) + 4 * var(--mv) - 2 * var(--vc) - 2px);
-
-    .css-vertical-container {
-      &::before {
-        content: "";
-        width: calc(var(--s) / 2 + var(--mh));
-        float: left;
-        height: 135%;
-        shape-outside: repeating-linear-gradient(
-          #0000 0 calc(var(--f) - 2px),
-          #000 0 var(--f)
-        );
-      }
+    .css-vertical-2-container {
+      margin: calc(var(--size) * 0.5) auto 0;
+      width: calc(var(--size) * calc(var(--Nhexa) - 1));
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      // grid-auto-flow: column;
+      grid-gap: 1px;
 
       div {
-        width: var(--s);
-        margin: var(--mv) var(--mh);
-        height: calc(var(--s) * var(--r));
-        display: inline-block;
-        font-size: initial;
-        clip-path: polygon(
-          var(--hc) 0,
-          calc(100% - var(--hc)) 0,
-          100% var(--vc),
-          100% calc(100% - var(--vc)),
-          calc(100% - var(--hc)) 100%,
-          var(--hc) 100%,
-          0 calc(100% - var(--vc)),
-          0 var(--vc)
-        );
         background: black;
-        margin-bottom: calc(var(--mv) - var(--vc));
+        width: var(--size);
+        height: calc(var(--size) / 1.1111111);
+        clip-path: url(#hexagono);
+        clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+        margin-right: calc(var(--size) / 2);
+        color: #fff;
+        overflow: hidden;
+      }
+      div:nth-child(2n) {
+        margin: calc(var(--size) * -0.45) calc(var(--size) * -0.25) 0
+          calc(var(--size) * -0.75);
       }
     }
   }

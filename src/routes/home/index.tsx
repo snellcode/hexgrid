@@ -6,7 +6,6 @@ const Home = () => {
       <h1>CSS Hexagons</h1>
       <ul>
         <li><a href="/css-vertical">CSS Vertical Hexagons</a></li>
-        <li><a href="/css-vertical-2">CSS Vertical Hexagons 2</a></li>
         <li><a href="/css-horizontal">CSS Horizontal Hexagons</a></li>
         <li><a href="/phaser-rex">Phaser Rex Plugin</a></li>
       </ul>

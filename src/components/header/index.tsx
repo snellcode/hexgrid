@@ -26,12 +26,6 @@ export const AppHeader = () => (
                     CSS (Vertical)
                   </Link>
                 </li>
-
-                <li>
-                  <Link activeClassName="active" href="/css-vertical-2">
-                    CSS (Vertical 2)
-                  </Link>
-                </li>
                 <li>
                   <Link activeClassName="active" href="/css-horizontal">
                     CSS (Horizontal)
@@ -40,11 +34,6 @@ export const AppHeader = () => (
                 <li>
                   <Link activeClassName="active" href="/phaser-rex">
                     Phaser (Rex Plugin)
-                  </Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" href="/phaser-custom">
-                    Phaser (Custom)
                   </Link>
                 </li>
                 <li>
