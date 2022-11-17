@@ -29,7 +29,8 @@ const config = {
 const Flower = () => {
   useEffect(() => {
     if (game) {
-      location.reload();
+      game.destroy();
+      game = null;
     }
     game = new Phaser.Game(config);
   });
