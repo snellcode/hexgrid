@@ -26,7 +26,7 @@ const config = {
   },
 };
 
-const PhaserRex2 = () => {
+const Flower = () => {
   useEffect(() => {
     if (game) {
       location.reload();
@@ -35,10 +35,11 @@ const PhaserRex2 = () => {
   });
   return (
     <div class="app-route container">
+      <p>If the game does not start, please refresh the page</p>
       <div id="phaser-container"></div>
     </div>
   );
 };
 
-export default PhaserRex2;
+export default Flower;
 

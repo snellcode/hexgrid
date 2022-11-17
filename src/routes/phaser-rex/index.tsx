@@ -35,7 +35,7 @@ const config = {
 };
 
 const getGrid = async () => {
-  const res = await fetch("assets/island.txt");
+  const res = await fetch("/assets/island.txt");
   if (!res.ok) throw new Error(res.statusText);
   let text = await res.text();
   return text

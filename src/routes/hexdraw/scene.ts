@@ -7,7 +7,6 @@ let tileY = 0;
 let chunkSize = 13;
 let offsetX = 0;
 let offsetY = 0;
-let speed = 1;
 
 const getGrid = async () => {
   const res = await fetch("/assets/island.txt");
@@ -68,6 +67,8 @@ var getHexagonGrid = function (scene) {
     x: 100,
     y: 100,
     size: 30,
+    // cellWidth: 72,
+    // cellHeight: 72,
     staggeraxis: staggeraxis,
     staggerindex: staggerindex,
   });
@@ -92,15 +93,6 @@ export class PhaserRexScene extends Phaser.Scene {
   preload() {
     this.load.image("green", "/assets/green.png");
     this.load.image("hexagon", "/assets/hexagon.png");
-
-    (this.load as any).rexAwait(
-      (successCallback: any, failureCallback: any) => {
-        getGrid().then((resp) => {
-          this.island = resp;
-          successCallback();
-        });
-      }
-    );
   }
 
   create() {
@@ -117,9 +109,9 @@ export class PhaserRexScene extends Phaser.Scene {
     const cam = this.cameras.main;
     this.bounds = {
       x: chunkSize * tileSize * 11,
-      y: chunkSize * tileSize * 12 - chunkSize * 50,
+      y: chunkSize * tileSize * 12 - chunkSize * 5,
     };
-    cam.setBounds(0, 0, this.bounds.x, this.bounds.y).setZoom(.1);
+    cam.setBounds(0, 0, this.bounds.x, this.bounds.y).setZoom(0.1);
     this.cameras.main.centerToBounds();
 
     this.text = this.add
@@ -128,6 +120,7 @@ export class PhaserRexScene extends Phaser.Scene {
       .setScrollFactor(0)
       .setFontSize(32)
       .setColor("#ffffff");
+    this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
     this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
       let newZoom;
@@ -135,50 +128,43 @@ export class PhaserRexScene extends Phaser.Scene {
       if (deltaY > 0) {
         newZoom = this.camera.zoom - 0.05;
         if (newZoom > 0) {
-          this.camera.zoom = Math.max(.1, newZoom);
+          this.camera.zoom = Math.min(2, Math.max(0.1, newZoom));
         }
       }
 
       if (deltaY < 0) {
         newZoom = this.camera.zoom + 0.05;
-        // if (newZoom < 1.3) {
-        this.camera.zoom = Math.max(.1, newZoom);;
-        // }
+        this.camera.zoom = Math.min(2, Math.max(0.1, newZoom));
       }
-
-      console.log(newZoom)
     });
   }
 
-  drawIsland(tileXY, i) {
-    let points = this.board.getGridPoints(
-      tileXY.x,
-      tileXY.y,
-      true
-    );
-    if (
-      this.island[tileXY.x + offsetX] !== undefined &&
-      this.island[tileXY.x + offsetX][tileXY.y + offsetY] != undefined
-    ) {
-      let tileValue = this.island[tileXY.x + offsetX][tileXY.y + offsetY];
-      let tileColor = getTileColor(tileValue);
-
-      this.graphics.fillStyle(tileColor).fillPoints(points);
-    }
-  }
-
-  drawGrid(i: any, tileXY: any, color: any) {
-    let points = this.board.getGridPoints(
-      tileXY.x,
-      tileXY.y,
-      true
-    );
+  drawGrid(i: any, tileXY: any, offsetX: any, offsetY: any, color: any) {
+    let points = this.getPoints(tileXY);
     this.graphics.lineStyle(1, color, 1.0);
     this.graphics.strokePoints(points, true);
+
+    if (Math.floor((this.tileXYArray as any).length / 2) === parseInt(i, 10)) {
+      this.graphics
+        .fillStyle(0xffffff)
+        .fillPoints(
+          this.board.getGridPoints(tileXY.x + offsetX, tileXY.y + offsetY, true)
+        );
+    }
+
     let worldXY = this.board.tileXYToWorldXY(tileXY.x, tileXY.y);
     this.add
       .text(worldXY.x, worldXY.y, `${tileXY.x},${tileXY.y}`)
       .setOrigin(0.5);
+  }
+
+  getPoints(tileXY) {
+    let points = this.board.getGridPoints(
+      tileXY.x + offsetX,
+      tileXY.y + offsetY,
+      true
+    );
+    return points;
   }
 
   createRexPlugins() {
@@ -186,6 +172,7 @@ export class PhaserRexScene extends Phaser.Scene {
     const staggerindex = "odd" as any;
 
     if (!this.rexBoard) {
+      console.log("error");
       return;
     }
 
@@ -201,7 +188,10 @@ export class PhaserRexScene extends Phaser.Scene {
         },
       })
       .setInteractive()
-      .on("tiledown", this.onTiledown.bind(this));
+      .on("tiledown", function (pointer: any, tileXY: any) {
+        tileX = tileXY.x;
+        tileY = tileXY.y;
+      });
 
     this.tileXYArray = this.board.fit(
       this.rexBoard.hexagonMap.hexagon(this.board, chunkSize)
@@ -212,11 +202,10 @@ export class PhaserRexScene extends Phaser.Scene {
     for (var i in this.tileXYArray) {
       // @ts-ignore
       tileXY = this.tileXYArray[i];
-      this.drawGrid(i, tileXY, 0xffff00);
-      // this.drawIsland(tileXY)
+      this.drawGrid(i, tileXY, 0, 0, 0xffff00);
     }
 
-    // this.rexBoard.createTileTexture(this.board, "tile", 0xff0000, 0x0000ff, 3);
+    this.rexBoard.createTileTexture(this.board, "tile", 0xff0000, 0x0000ff, 3);
 
     this.board
       .forEachTileXY((tileXY, board) => {
@@ -229,29 +218,18 @@ export class PhaserRexScene extends Phaser.Scene {
         );
       }, this)
       .setInteractive()
-      .on("tiledown", (pointer, tileXY) => {
-        const centerX = Math.floor(800 / 2);
-        const centerY = Math.floor(600 / 2);
-        const tile = this.board.tileXYZToChess(tileXY.x, tileXY.y, 0);
-
-        if (pointer.downX > centerX) {
-          offsetX += speed
-        }
-        if (pointer.downY > centerY) {
-          offsetY += speed
-        }
-        if (pointer.downX < centerX) {
-          offsetX -= speed
-        }
-        if (pointer.downY < centerY) {
-          offsetY -= speed
+      .on("tileover", (pointer, tileXY) => {
+        var tile = this.board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+        if (tile) {
+          tile.setAlpha(1);
         }
       })
-  }
-
-  onTiledown(pointer: any, tileXY: any) {
-    tileX = tileXY.x;
-    tileY = tileXY.y;
+      .on("tileout", (pointer, tileXY) => {
+        var tile = this.board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+        if (tile) {
+          tile.setAlpha(0.5);
+        }
+      });
   }
 
   createGraphics() {
@@ -272,12 +250,5 @@ export class PhaserRexScene extends Phaser.Scene {
     this.createRexPlugins();
   }
 
-  updateGrid() {
-    var tileXY, worldXY;
-    for (var i in this.tileXYArray) {
-      // @ts-ignore
-      tileXY = this.tileXYArray[i];
-      this.drawIsland(tileXY, i)
-    }
-  }
+  updateGrid() {}
 }

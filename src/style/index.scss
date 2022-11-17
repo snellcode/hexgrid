@@ -16,9 +16,11 @@ pre {
 
 a {
   color: white;
+  text-decoration: underline;
 
   &:hover {
     color: hotpink;
+    text-decoration: none;
   }
 }
 

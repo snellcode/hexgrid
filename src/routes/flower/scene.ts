@@ -91,6 +91,23 @@ export class PhaserRexScene extends Phaser.Scene {
       .setFontSize(32)
       .setColor("#ffffff");
     this.keys = this.input.keyboard.addKeys("W,A,S,D");
+      this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+      let newZoom;
+
+      if (deltaY > 0) {
+        newZoom = this.camera.zoom - 0.05;
+        if (newZoom > 0) {
+          this.camera.zoom = newZoom;
+        }
+      }
+
+      if (deltaY < 0) {
+        newZoom = this.camera.zoom + 0.05;
+        // if (newZoom < 1.3) {
+        this.camera.zoom = newZoom;
+        // }
+      }
+    });
   }
 
   updateCamera() {
@@ -107,15 +124,6 @@ export class PhaserRexScene extends Phaser.Scene {
     } else if (this.keys.S.isDown) {
       this.camera.scrollY += 6;
     }
-
-    this.text.setText([
-      "ScrollX: " + cam.scrollX,
-      "ScrollY: " + cam.scrollY,
-      "MidX: " + cam.midPoint.x,
-      "MidY: " + cam.midPoint.y,
-      "tileX " + tileX,
-      "tileY " + tileY,
-    ]);
   }
 
   drawGrid(i: any, tileXY: any, offsetX: any, offsetY: any, color: any) {
