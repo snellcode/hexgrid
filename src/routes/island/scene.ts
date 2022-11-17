@@ -10,7 +10,8 @@ let offsetY = 0;
 let speed = 2;
 
 const getGrid = async () => {
-  const res = await fetch("/assets/island.txt");
+  const cb = (new Date).getTime();
+  const res = await fetch(`/assets/island.txt?${cb}`);
   if (!res.ok) throw new Error(res.statusText);
   let text = await res.text();
   return text

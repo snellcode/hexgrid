@@ -8,21 +8,6 @@ let chunkSize = 13;
 let offsetX = 0;
 let offsetY = 0;
 
-const getGrid = async () => {
-  const res = await fetch("/assets/island.txt");
-  if (!res.ok) throw new Error(res.statusText);
-  let text = await res.text();
-  return text
-    .split("\n")
-    .filter((x) => x.length)
-    .map((x) =>
-      x
-        .split(",")
-        .filter((x) => x !== "")
-        .map((x) => parseFloat(x))
-    );
-};
-
 const clamps = [
   0.01, // water 0
   0.18, // grassland 1
