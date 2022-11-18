@@ -241,6 +241,7 @@ export class PhaserRexScene extends Phaser.Scene {
   }
 
   updateGrid() {
+    this.graphics.clear()
     var tileXY, worldXY;
     for (var i in this.tileXYArray) {
       // @ts-ignore
