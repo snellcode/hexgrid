@@ -1,16 +1,20 @@
 import Phaser from "phaser";
 import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 
-let tileSize = 128;
+let screenWidth = 1200;
+let screenHeight = 800;
+
+let tileSize = 32;
 let tileX = 0;
 let tileY = 0;
-let chunkSize = 13;
+let chunkSize = 39;
 let offsetX = 0;
 let offsetY = 0;
-let speed = 1;
+let speed = 20;
 
 const getGrid = async () => {
-  const res = await fetch("/assets/island.txt");
+  const cb = (new Date).getTime();
+  const res = await fetch(`/assets/island-large.txt?${cb}`);
   if (!res.ok) throw new Error(res.statusText);
   let text = await res.text();
   return text
@@ -50,48 +54,20 @@ const getTileColor = (value: any) => {
   }
 };
 
-var getQuadGrid = function (scene) {
-  var grid = scene.rexBoard.add.quadGrid({
-    x: 400,
-    y: 100,
-    cellWidth: 100,
-    cellHeight: 50,
-    type: 1,
-  });
-  return grid;
-};
-
-var getHexagonGrid = function (scene) {
-  var staggeraxis = "x";
-  var staggerindex = "odd";
-  var grid = scene.rexBoard.add.hexagonGrid({
-    x: 100,
-    y: 100,
-    size: 30,
-    staggeraxis: staggeraxis,
-    staggerindex: staggerindex,
-  });
-  return grid;
-};
-
 export class PhaserRexScene extends Phaser.Scene {
   private camera: any;
   private graphics: any;
-  private keys: any;
-  private text: any;
-  private cols = 50;
-  private rows = 50;
-  // private tileSize = 16;
   private board: any;
   private rexBoard: BoardPlugin | undefined;
   private tileXYArray: any;
   private bounds: any;
   private tile = { x: 0, y: 0 } as any;
   private island: any;
+  private text: any;
 
   preload() {
     this.load.image("green", "/assets/green.png");
-    this.load.image("hexagon", "/assets/hexagon.png");
+    this.load.image("hexagon", "/assets/hexagon-red.png");
 
     (this.load as any).rexAwait(
       (successCallback: any, failureCallback: any) => {
@@ -113,13 +89,18 @@ export class PhaserRexScene extends Phaser.Scene {
   }
 
   createCamera() {
+
+    //  this.scale.displaySize.setAspectRatio( 1200/800w );
+    // this.scale.refresh();
+
+
     this.camera = this.cameras.main;
     const cam = this.cameras.main;
     this.bounds = {
       x: chunkSize * tileSize * 11,
       y: chunkSize * tileSize * 12 - chunkSize * 50,
     };
-    cam.setBounds(0, 0, this.bounds.x, this.bounds.y).setZoom(.1);
+    cam.setBounds(0, 0, this.bounds.x, this.bounds.y).setZoom(1);
     this.cameras.main.centerToBounds();
 
     this.text = this.add
@@ -135,18 +116,14 @@ export class PhaserRexScene extends Phaser.Scene {
       if (deltaY > 0) {
         newZoom = this.camera.zoom - 0.05;
         if (newZoom > 0) {
-          this.camera.zoom = Math.max(.1, newZoom);
+          this.camera.zoom = Math.min(2, Math.max(.1, newZoom));
         }
       }
 
       if (deltaY < 0) {
         newZoom = this.camera.zoom + 0.05;
-        // if (newZoom < 1.3) {
-        this.camera.zoom = Math.max(.1, newZoom);;
-        // }
+        this.camera.zoom = Math.min(2, Math.max(.1, newZoom));
       }
-
-      console.log(newZoom)
     });
   }
 
@@ -213,15 +190,14 @@ export class PhaserRexScene extends Phaser.Scene {
       // @ts-ignore
       tileXY = this.tileXYArray[i];
       this.drawGrid(i, tileXY, 0xffff00);
-      // this.drawIsland(tileXY)
     }
 
-    // this.rexBoard.createTileTexture(this.board, "tile", 0xff0000, 0x0000ff, 3);
+    this.rexBoard.createTileTexture(this.board, "tile", 0xffffff, 0xffffff, 3);
 
     this.board
       .forEachTileXY((tileXY, board) => {
         this.board.addChess(
-          this.add.image(0, 0, "hexagon").setAlpha(0.25).setScale(1),
+          this.add.image(0, 0, "tile").setAlpha(0.125).setScale(1),
 
           tileXY.x,
           tileXY.y,
@@ -230,8 +206,8 @@ export class PhaserRexScene extends Phaser.Scene {
       }, this)
       .setInteractive()
       .on("tiledown", (pointer, tileXY) => {
-        const centerX = Math.floor(800 / 2);
-        const centerY = Math.floor(600 / 2);
+        const centerX = Math.floor(screenWidth / 2);
+        const centerY = Math.floor(screenHeight / 2);
         const tile = this.board.tileXYZToChess(tileXY.x, tileXY.y, 0);
 
         if (pointer.downX > centerX) {
@@ -273,6 +249,7 @@ export class PhaserRexScene extends Phaser.Scene {
   }
 
   updateGrid() {
+    this.graphics.clear()
     var tileXY, worldXY;
     for (var i in this.tileXYArray) {
       // @ts-ignore

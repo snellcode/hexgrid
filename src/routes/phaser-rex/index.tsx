@@ -9,11 +9,13 @@ let game: any;
 
 const config = {
   type: Phaser.AUTO,
-  parent: "phaser-container",
-  width: 800,
-  height: 600,
-  physics: {
-    default: "arcade",
+
+  scale: {
+    mode: Phaser.Scale.FIT,
+    parent: "phaser-container",
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 1200,
+    height: 800,
   },
   scene: [PhaserRexScene],
   plugins: {
@@ -34,21 +36,6 @@ const config = {
   },
 };
 
-const getGrid = async () => {
-  const res = await fetch("/assets/island.txt");
-  if (!res.ok) throw new Error(res.statusText);
-  let text = await res.text();
-  return text
-    .split("\n")
-    .filter((x) => x.length)
-    .map((x) =>
-      x
-        .split(",")
-        .filter((x) => x !== "")
-        .map((x) => parseFloat(x))
-    );
-};
-
 type Props = {
   data: any;
   error: any;
@@ -58,12 +45,14 @@ type Props = {
 const PhaserRex = () => {
   useEffect(() => {
     if (game) {
-      location.reload();
+      game.destroy();
+      game = null;
     }
     game = new Phaser.Game(config);
   });
   return (
     <div class="app-route container">
+      <p>If the game does not start, please refresh the page</p>
       <div id="phaser-container"></div>
     </div>
   );
