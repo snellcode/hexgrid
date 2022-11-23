@@ -9,6 +9,10 @@ let game: any;
 
 const config = {
   type: Phaser.AUTO,
+  // fps: {
+  //   target: 24,
+  //   forceSetTimeOut: true,
+  // },
   scale: {
     mode: Phaser.Scale.FIT,
     parent: "phaser-container",
@@ -35,7 +39,7 @@ const config = {
   },
 };
 
-const PhaserRex = () => {
+const IslandFit = () => {
   useEffect(() => {
     if (game) {
       game.destroy();
@@ -51,4 +55,4 @@ const PhaserRex = () => {
   );
 };
 
-export default PhaserRex;
+export default IslandFit;

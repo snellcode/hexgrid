@@ -35,7 +35,7 @@ const config = {
   },
 };
 
-const PhaserRex = () => {
+const IslandCentered = () => {
   useEffect(() => {
     if (game) {
       game.destroy();
@@ -51,4 +51,4 @@ const PhaserRex = () => {
   );
 };
 
-export default PhaserRex;
+export default IslandCentered;

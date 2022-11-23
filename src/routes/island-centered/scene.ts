@@ -3,9 +3,9 @@ import BoardPlugin from "phaser3-rex-plugins/plugins/board-plugin";
 import { MapService } from "@src/services/map";
 import { roundTo } from "@src/services/util";
 
-// let tileSize = 16;
-// let visibleWidth = 50;
-// let visibleHeight = 32;
+let tileSize = 16;
+let visibleWidth = 50;
+let visibleHeight = 32;
 
 // let tileSize = 8;
 // let visibleWidth = 100;
@@ -19,9 +19,9 @@ import { roundTo } from "@src/services/util";
 // let visibleWidth = 400;
 // let visibleHeight = 256;
 
-let tileSize = 1;
-let visibleWidth = 800;
-let visibleHeight = 512;
+// let tileSize = 1;
+// let visibleWidth = 800;
+// let visibleHeight = 512;
 
 let screenWidth = 800;
 let screenHeight = 600;
@@ -103,7 +103,7 @@ export class Scene extends Phaser.Scene {
       let tileValue = this.island[tileXY.x + offsetX][tileXY.y + offsetY];
       let tileColor = MapService.getTileColor(tileValue);
       this.graphics.fillStyle(tileColor).fillPoints(points);
-      // this.graphics.strokePoints(points, true);
+      this.graphics.strokePoints(points, true);
     }
   }
 

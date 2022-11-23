@@ -7,9 +7,9 @@ import { roundTo } from "@src/services/util";
 // let visibleWidth = 50;
 // let visibleHeight = 32;
 
-// let tileSize = 8;
-// let visibleWidth = 100;
-// let visibleHeight = 64;
+let tileSize = 8;
+let visibleWidth = 100;
+let visibleHeight = 64;
 
 // let tileSize = 4;
 // let visibleWidth = 200;
@@ -19,9 +19,9 @@ import { roundTo } from "@src/services/util";
 // let visibleWidth = 400;
 // let visibleHeight = 256;
 
-let tileSize = 1;
-let visibleWidth = 800;
-let visibleHeight = 512;
+// let tileSize = 1;
+// let visibleWidth = 800;
+// let visibleHeight = 512;
 
 let screenWidth = 800;
 let screenHeight = 600;
@@ -32,6 +32,7 @@ let rows = 1440;
 let offsetX = Math.floor(cols / 2);
 let offsetY = Math.floor(rows / 2);
 
+console.log(offsetX)
 export class Scene extends Phaser.Scene {
   private graphics: any;
   private board: any;
@@ -61,7 +62,7 @@ export class Scene extends Phaser.Scene {
       },
     });
 
-    var centerRectSize = 1;
+    var centerRectSize = 2;
     this.add.rectangle(
       screenWidth / 2 - centerRectSize / 2,
       screenHeight / 2 - centerRectSize / 2,

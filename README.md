@@ -29,3 +29,9 @@ npx preact-cli create typescript hexgrid
 ## Thanks To:
 
 https://www.redblobgames.com/grids/hexagons/
+
+https://codepen.io/rexrainbow/pens/public
+
+https://shakuro.com/blog/phaser-js-a-step-by-step-tutorial-on-making-a-phaser-3-game
+
+https://github.com/phaser-discord/community/blob/master/FAQ.md
